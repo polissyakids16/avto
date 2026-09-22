@@ -1,0 +1,343 @@
+/*
+ * CarWash & Shine — safe visual layer for the Dopetrope template.
+ * Load this file AFTER assets/css/main.css.
+ */
+
+:root {
+	--shine-ink: #20252b;
+	--shine-muted: #62707b;
+	--shine-surface: #ffffff;
+	--shine-surface-soft: #f4f7f8;
+	--shine-accent: #0b9bb5;
+	--shine-accent-dark: #087a92;
+	--shine-glow: rgba(11, 155, 181, .22);
+	--shine-radius: 14px;
+	--shine-shadow: 0 14px 36px rgba(20, 38, 48, .10);
+	--shine-shadow-hover: 0 22px 48px rgba(20, 38, 48, .18);
+}
+
+body {
+	background-color: #20262b;
+	background-image: linear-gradient(135deg, rgba(5, 20, 29, .88), rgba(22, 38, 47, .92)), url("images/bg02.png");
+}
+
+#header {
+	background-color: #fff;
+	background-image: linear-gradient(180deg, #fff 0%, #f6f9fa 100%);
+}
+
+#header h1 a {
+	color: var(--shine-ink);
+	letter-spacing: .04em;
+}
+
+#nav > ul > li > a {
+	border-radius: 999px;
+	transition: background-color .25s ease, color .25s ease, transform .25s ease;
+}
+
+#nav > ul > li > a:hover,
+#nav > ul > li.current > a {
+	background: var(--shine-accent);
+	color: #fff;
+	transform: translateY(-2px);
+}
+
+#banner {
+	position: relative;
+	overflow: hidden;
+}
+
+#banner:before {
+	background: linear-gradient(100deg, rgba(3, 20, 29, .78), rgba(5, 42, 54, .35));
+	content: '';
+	inset: 0;
+	position: absolute;
+}
+
+#banner header {
+	position: relative;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, .3);
+}
+
+#main {
+	background: var(--shine-surface-soft);
+}
+
+.box {
+	border: 1px solid rgba(17, 53, 68, .08);
+	border-radius: var(--shine-radius);
+	box-shadow: var(--shine-shadow);
+	overflow: hidden;
+}
+
+.box > header,
+.box > p,
+.box > footer {
+	padding-left: 1.85em;
+	padding-right: 1.85em;
+}
+
+.box > header {
+	padding-top: 1.75em;
+}
+
+.box > p:last-child,
+.box > footer:last-child {
+	padding-bottom: 1.85em;
+}
+
+/* Existing service and blog cards become interactive without new HTML classes. */
+#main .box {
+	transition: transform .32s cubic-bezier(.2, .7, .2, 1), box-shadow .32s ease, border-color .32s ease;
+}
+
+#main .box:hover {
+	border-color: rgba(11, 155, 181, .28);
+	box-shadow: var(--shine-shadow-hover);
+	transform: translateY(-7px);
+}
+
+/* Cards in each existing Dopetrope row always share one height. */
+body.homepage #main .row > [class*="col-"] {
+	display: flex;
+}
+
+body.homepage #main .row > [class*="col-"] > .box {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+body.homepage #main .row > [class*="col-"] > .box > p:last-child {
+	flex-grow: 1;
+}
+
+.image.featured,
+.box > img {
+	background: #dfe8eb;
+	overflow: hidden;
+}
+
+.image.featured img,
+.box > img {
+	transition: transform .5s cubic-bezier(.2, .7, .2, 1), filter .5s ease;
+}
+
+.box:hover .image.featured img,
+.box:hover > img {
+	filter: saturate(1.08) contrast(1.03);
+	transform: scale(1.055);
+}
+
+input[type="button"], input[type="submit"], input[type="reset"], button, .button {
+	background: var(--shine-accent);
+	border-radius: 999px;
+	box-shadow: 0 8px 18px var(--shine-glow);
+	transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, button:hover, .button:hover {
+	background: var(--shine-accent-dark);
+	box-shadow: 0 12px 24px rgba(11, 155, 181, .32);
+	transform: translateY(-3px);
+}
+
+input[type="button"]:focus-visible, input[type="submit"]:focus-visible, input[type="reset"]:focus-visible, button:focus-visible, .button:focus-visible, a:focus-visible {
+	outline: 3px solid rgba(11, 155, 181, .5);
+	outline-offset: 3px;
+}
+
+/* Applied by assets/js/custom.js. The fallback remains visible when JavaScript is unavailable. */
+.reveal-ready {
+	opacity: 0;
+	transform: translate3d(0, 28px, 0);
+	transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+	will-change: opacity, transform;
+}
+
+.reveal-ready.reveal-left { transform: translate3d(-38px, 0, 0); }
+.reveal-ready.reveal-right { transform: translate3d(38px, 0, 0); }
+.reveal-ready.reveal-scale { transform: scale(.94); }
+
+.reveal-ready.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+@media screen and (max-width: 736px) {
+	.box > header, .box > p, .box > footer {
+		padding-left: 1.25em;
+		padding-right: 1.25em;
+	}
+
+	#main .box:hover { transform: translateY(-3px); }
+}
+
+/* Exterior wash service page */
+.wash-hero {
+	align-items: stretch;
+	background: linear-gradient(130deg, #0d3540, #0c7184);
+	border-radius: 20px;
+	box-shadow: 0 20px 45px rgba(12, 32, 41, .24);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	overflow: hidden;
+}
+
+.wash-hero-copy { align-self: center; color: rgba(255, 255, 255, .86); padding: clamp(2.4rem, 6vw, 5.3rem); }
+.wash-hero h2 { color: #fff; font-size: clamp(1.75rem, 3vw, 2.55rem); line-height: 1.12; margin: 0 0 .75rem; }
+.wash-hero p { margin: 0; }
+.wash-hero .eyebrow { color: #8ee5ef; }
+.wash-hero-image { margin: 0; min-height: 320px; }
+.wash-hero-image img { height: 100%; object-fit: cover; width: 100%; }
+
+.wash-steps { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.wash-step { background: var(--shine-surface); border: 1px solid rgba(17, 53, 68, .09); border-radius: var(--shine-radius); box-shadow: var(--shine-shadow); padding: 2rem; position: relative; transition: transform .3s ease, box-shadow .3s ease; }
+.wash-step:hover { box-shadow: var(--shine-shadow-hover); transform: translateY(-5px); }
+.wash-step > .icon { background: rgba(11, 155, 181, .12); border-radius: 50%; color: var(--shine-accent-dark); display: grid; font-size: 1.15rem; height: 2.7rem; margin-bottom: 1.25rem; place-items: center; width: 2.7rem; }
+.wash-step h3 { margin: 0 0 .6rem; }
+.wash-step p { margin-bottom: 1rem; }
+.wash-step ul, .wash-result ul { list-style: none; margin: 0; padding: 0; }
+.wash-step li, .wash-result li { margin: .45rem 0; padding-left: 1.35rem; position: relative; }
+.wash-step li:before, .wash-result li:before { color: var(--shine-accent); content: '✓'; font-weight: 900; left: 0; position: absolute; }
+.wash-step .step-number { color: rgba(11, 155, 181, .35); font-size: .85rem; font-weight: 900; position: absolute; right: 1.7rem; top: 1.7rem; }
+.wash-result { align-items: center; background: #e7f3f5; border-radius: 18px; display: grid; gap: 2.5rem; grid-template-columns: 1.25fr 1fr; margin-top: clamp(3.5rem, 8vw, 6rem); padding: clamp(2rem, 5vw, 4rem); }
+.wash-result p:last-child { margin: 0; }
+.wash-result li { color: var(--shine-ink); font-weight: 700; margin-bottom: .8rem; }
+
+@media screen and (max-width: 980px) { .wash-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media screen and (max-width: 736px) { .wash-hero, .wash-result, .wash-steps { grid-template-columns: 1fr; } .wash-hero-image { min-height: 230px; order: -1; } .wash-step { padding: 1.5rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+	*, *:before, *:after {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
+	}
+
+	.reveal-ready { opacity: 1; transform: none; }
+}
+
+/* Polishing service page */
+.service-page {
+	color: var(--shine-muted);
+	margin: 0 auto;
+	max-width: 1080px;
+}
+
+.polish-hero {
+	align-items: stretch;
+	background: linear-gradient(130deg, #132a35, #1b4b58);
+	border-radius: 20px;
+	box-shadow: 0 20px 45px rgba(12, 32, 41, .24);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	overflow: hidden;
+}
+
+.polish-hero-copy {
+	align-self: center;
+	color: rgba(255, 255, 255, .86);
+	padding: clamp(2.4rem, 6vw, 5.3rem);
+}
+
+.polish-hero h2, .polish-result h2, .service-intro h2 {
+	color: var(--shine-ink);
+	font-size: clamp(1.75rem, 3vw, 2.55rem);
+	line-height: 1.12;
+	margin: 0 0 .75rem;
+}
+
+.polish-hero h2 { color: #fff; }
+.polish-hero p { margin: 0; }
+
+.eyebrow {
+	color: var(--shine-accent);
+	font-size: .78rem;
+	font-weight: 900;
+	letter-spacing: .15em;
+	margin: 0 0 .8rem;
+	text-transform: uppercase;
+}
+
+.polish-hero .eyebrow { color: #74d5e6; }
+.polish-hero-image { margin: 0; min-height: 320px; }
+.polish-hero-image img { height: 100%; object-fit: cover; width: 100%; }
+
+.service-intro {
+	margin: clamp(3.5rem, 8vw, 6rem) auto 2.2rem;
+	max-width: 720px;
+	text-align: center;
+}
+
+.service-intro p:last-child { margin: 0; }
+
+.polish-steps {
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.polish-step {
+	background: var(--shine-surface);
+	border: 1px solid rgba(17, 53, 68, .09);
+	border-radius: var(--shine-radius);
+	box-shadow: var(--shine-shadow);
+	padding: 2rem;
+	position: relative;
+	transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.polish-step:hover {
+	box-shadow: var(--shine-shadow-hover);
+	transform: translateY(-5px);
+}
+
+.polish-step > .icon {
+	background: rgba(11, 155, 181, .12);
+	border-radius: 50%;
+	color: var(--shine-accent-dark);
+	display: grid;
+	font-size: 1.15rem;
+	height: 2.7rem;
+	margin-bottom: 1.25rem;
+	place-items: center;
+	width: 2.7rem;
+}
+
+.polish-step h3 { margin: 0 0 .6rem; }
+.polish-step p { margin-bottom: 1rem; }
+.polish-step ul, .polish-result ul { list-style: none; margin: 0; padding: 0; }
+.polish-step li, .polish-result li { margin: .45rem 0; padding-left: 1.35rem; position: relative; }
+.polish-step li:before, .polish-result li:before { color: var(--shine-accent); content: '✓'; font-weight: 900; left: 0; position: absolute; }
+
+.step-number {
+	color: rgba(11, 155, 181, .35);
+	font-size: .85rem;
+	font-weight: 900;
+	right: 1.7rem;
+	position: absolute;
+	top: 1.7rem;
+}
+
+.polish-result {
+	align-items: center;
+	background: #e7f3f5;
+	border-radius: 18px;
+	display: grid;
+	gap: 2.5rem;
+	grid-template-columns: 1.25fr 1fr;
+	margin-top: clamp(3.5rem, 8vw, 6rem);
+	padding: clamp(2rem, 5vw, 4rem);
+}
+
+.polish-result p:last-child { margin: 0; }
+.polish-result li { color: var(--shine-ink); font-weight: 700; margin-bottom: .8rem; }
+
+@media screen and (max-width: 736px) {
+	.polish-hero, .polish-result, .polish-steps { grid-template-columns: 1fr; }
+	.polish-hero-image { min-height: 230px; order: -1; }
+	.polish-step { padding: 1.5rem; }
+}
